@@ -1,10 +1,12 @@
 .periodic-table {
-  width: calc(18 * 64px + 17 * 4px);
-  margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(18, 64px);
   grid-template-rows: repeat(10, 64px);
   grid-gap: 4px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .element {
@@ -14,7 +16,6 @@
   position: relative;
   align-items: center;
   justify-content: center;
-  /* transition: transform 0.1s ease-out; */
 }
 
 .element:hover {
