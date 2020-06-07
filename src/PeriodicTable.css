@@ -1,0 +1,37 @@
+.periodic-table {
+  width: calc(18 * 64px + 17 * 4px);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(18, 64px);
+  grid-template-rows: repeat(10, 64px);
+  grid-gap: 4px;
+}
+
+.element {
+  background: white;
+  border: 1px solid #aaa;
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  /* transition: transform 0.1s ease-out; */
+}
+
+.element:hover {
+  transform: scale(1.25, 1.25);
+  z-index: 1;
+}
+
+.element .number {
+  font-size: 8px;
+  position: absolute;
+  top: 5px;
+  left: 5px;
+}
+
+.element .name {
+  font-size: 8px;
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+}
