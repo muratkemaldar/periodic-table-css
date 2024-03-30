@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .periodic-table {
   display: grid;
   grid-template-columns: repeat(18, 64px);
