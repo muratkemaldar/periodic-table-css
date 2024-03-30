@@ -11,41 +11,12 @@ const client = new MongoClient(uri, {
     }
 });
 
-export default async function handler() {
+export default async function handler(req, res) {
         await client.connect(); // Connect to the MongoDB server
         const database = client.db('TabelaPeriodica'); // Select the 'TabelaPeriodica' database
         const collection = database.collection('Elementos'); // Select the 'Elementos' collection
 
         const data = await collection.find().toArray(); // Retrieve all documents from the collection
 
-        const colorMap = {
-            "noble gas": "#FFBC42",
-            "alkaline earth metal": "#EC674E",
-            "diatomic nonmetal": "#D81159",
-            "alkali metal": "#8F2D56",
-            "transition metal": "#58586B",
-            "post-transition metal": "#218380",
-            lanthanide: "#4AABAF",
-            metalloid: "#73D2DE",
-        };
-
-        return (
-            <div className="periodic-table">
-              {data.elements.map((element) => (
-                <div
-                  className="element"
-                  key={element.name}
-                  style={{
-                    gridRow: element.ypos,
-                    gridColumn: element.xpos,
-                    borderColor: colorMap[element.category],
-                  }}
-                >
-                  <strong>{element.symbol}</strong>
-                  <small className="number">{element.number}</small>
-                  <small className="name">{element.name}</small>
-                </div>
-              ))}
-            </div>
-          );
+        res.json(data); // Send the retrieved data as a JSON response
 }
