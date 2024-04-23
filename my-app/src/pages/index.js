@@ -1,6 +1,4 @@
-import React from "react";
-import data from "./PeriodicTableJSON.json";
-import "./PeriodicTable.css";
+import { useEffect, useState } from "react"
 
 const colorMap = {
   "noble gas": "#FFBC42",
@@ -13,11 +11,22 @@ const colorMap = {
   metalloid: "#73D2DE",
 };
 
-const PeriodicTable = () => {
+export default function Home() {
+  const [elementos, setElementos] = useState([])
+
+  useEffect(() => {
+    fetch("/api/elementos")
+      .then(res => res.json())
+      .then(data => setElementos(data))
+  }, [])
+
+  const elementosList = [... new Set(elementos.map((e)=>e.tipo))]
+
   return (
-    <div className="periodic-table">
-      {data.elements.map((element) => (
-        <div
+    <h2>{elementosList.map((elementoNome)=>(
+      <div className="periodic-table">
+        {elementos.filter(e=>e.tipo == elementoNome).map(element=>(
+          <div
           className="element"
           key={element.name}
           style={{
@@ -30,9 +39,9 @@ const PeriodicTable = () => {
           <small className="number">{element.number}</small>
           <small className="name">{element.name}</small>
         </div>
-      ))}
-    </div>
-  );
-};
+        ))}
+      </div>
+    ))}</h2>
+  )
+}
 
-export default PeriodicTable;
